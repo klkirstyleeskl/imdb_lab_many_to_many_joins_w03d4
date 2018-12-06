@@ -4,6 +4,7 @@ require_relative('models/star')
 require_relative('models/casting')
 
 Movie.delete_all
+Star.delete_all
 
 movie1 = Movie.new({ 'title' => 'Lord of the Rings', 'genre' => 'Fantasy' })
 
