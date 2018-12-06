@@ -34,5 +34,17 @@ class Movie
     SqlRunner.run(sql)
   end
 
+  def stars()
+    sql =  "SELECT stars.* FROM
+      stars INNER JOIN castings ON
+      stars.id = castings.star_id
+      WHERE castings.movie_id = $1"
+      values = [@id]
+      stars = SqlRunner.run(sql, values)
+      return stars.map{ |star| Star.new(star)}
+    end
 
+
+
+    
 end
