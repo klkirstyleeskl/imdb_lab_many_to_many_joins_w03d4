@@ -5,18 +5,19 @@ require_relative('casting')
 class Star
 
   attr_reader :id
-  attr_accessor :first_name, :last_name
+  attr_accessor :first_name, :last_name, :fee
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @first_name = options['first_name']
     @last_name = options['last_name']
+    @fee = options['fee'].to_i
   end
 
   def save()
     sql = "INSERT INTO stars
-    (first_name, last_name) VALUES ($1, $2) RETURNING ID"
-    values = [@first_name, @last_name]
+    (first_name, last_name, fee) VALUES ($1, $2, $3) RETURNING ID"
+    values = [@first_name, @last_name, @fee]
     star = SqlRunner.run(sql, values).first
     @id = star['id'].to_i
   end
